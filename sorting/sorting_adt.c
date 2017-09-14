@@ -151,8 +151,44 @@ void merge_sort(int arr[], int start, int end)
 		merge(arr,start,mid,end);
 		}
 	}
-//--------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------------------
+//Quick Sort
+/*
+ *Runtime complexity
+ *Best Case    : O(nlogn)
+ *Average Case : O(nlogn)
+ *Worst Case   : O(n2)
+ */
 
+//int pivot=0;
+int partition(int arr[], int start, int end)
+	{
+	int i,pIndex=(start-1),pivot=arr[end];
+	for (i=start; i < (end-1); i++)
+		{
+		if (arr[i] <= pivot)
+			{
+			pIndex++;
+			swap(&arr[pIndex],&arr[i]);			
+			}
+		}
+		swap(&arr[pIndex + 1],&arr[end]);
+	return (pIndex + 1);
+	}
+
+void quick_sort(int arr[], int start, int end)
+	{
+	if(start >= end)
+		return;
+	else
+		{
+		int pivot = partition(arr,start,end);
+		quick_sort(arr,start,pivot-1);
+		quick_sort(arr,pivot+1,end);
+		}
+	}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------
 //display
 void display(int arr[], int size)
 	{
@@ -173,7 +209,8 @@ int main()
 	//selection_sort(arr,size);
 	//bubble_sort(arr,size);
 	//optimise_bubble_sort(arr,size);
-	merge_sort(arr,0,size-1);
+	//merge_sort(arr,0,size-1);
+	quick_sort(arr,0,size-1);
 	display(arr,size);
 	return 0;
 	}
